@@ -1,0 +1,31 @@
+/* font-family: 'IM Fell DW Pica SC', serif; */
+/* font-family: 'IM Fell Great Primer', serif; */
+
+.nav-wrapper {
+  margin: auto 10px; 
+}
+
+#scrapeBtn {
+  margin: 15px 0px;
+}
+
+.parallax-container {
+  margin: 0;
+}
+
+#parallaxImg {
+  height: 400px;
+  width: auto;
+}
+
+.title {
+  margin: 150px auto;
+  width: 500px;
+  border-radius: 20px; 
+  background: rgba(245, 245, 245, 0.726); 
+  font-family: 'IM Fell DW Pica SC', serif;
+}
+
+#titleText, #subText {
+  margin: 0;
+}

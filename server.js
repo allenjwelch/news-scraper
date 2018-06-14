@@ -38,12 +38,6 @@ app.get('/scrape', function(req, res) {
       result.title = $(element).children().children().children("h2.headline").text().trim();
       result.summary = $(element).children().children().children("p.summary").text();
       result.link = $(element).children().attr("href");
-      
-      // results.push({
-      //   title: title,
-      //   summary: summary,
-      //   link: link,
-      // });
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
@@ -56,15 +50,21 @@ app.get('/scrape', function(req, res) {
         return res.json(err);
       });
     });
-
-    // console.log('===> US Headlines from https://www.nytimes.com/section/us <===');
-    // console.log(result);
-
-    res.send("Scrape Complete");
-
+    res.json("Scrape Complete");
   })
 });
 
+// Route for getting all Articles from the db
+app.get("/articles", function(req, res) {
+  // TODO: Finish the route so it grabs all of the articles
+  db.Article.find({})
+  .then(function(dbArticle) {
+    res.json(dbArticle); 
+  })
+  .catch(function(err) {
+    res.json(err); 
+  })
+});
 
 // Start the server
 app.listen(PORT, function() {
