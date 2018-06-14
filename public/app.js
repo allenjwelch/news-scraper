@@ -2,28 +2,35 @@ $(document).ready(function() {
   $('.parallax').parallax();
 
 
-
   // TODO: Click for scraping Articles (send Toast)
-  // M.toast({html: 'I am a toast!'})
   $('#scrapeBtn').on("click", function() {
-    console.log('clicked'); 
-    $.getJSON("/articles", function(data) {
+    M.toast({html: '50 Articles Scraped!'})
+    $(".articles").empty(); 
+    $.get("/articles", function(data) {
       // For each one
       console.log(data); 
-      data.forEach((article) => {
+      let reducedData = [];
+      for (i=100; i < 151; i++) {
+        reducedData.push(data[i]);
+      };
+      reducedData.forEach((article) => {
+        if (article.summary === undefined) {
+          article.summary = 'Summary Unavailable'; 
+        }
         let row = $(`<div class="row">`); 
         let col = $(`<div class="col l12 m12 s12">`); 
         let card = $(`<div class="card teal lighten-3">`); 
         let cardContent = $(`<div class="card-content">`); 
-        let cardAction = $(`<div class="card-action cyan lighten-5">`); 
+        let cardAction = $(`<div class="card-action cyan lighten-4">`); 
 
         cardContent.append(`
-          <span class="card-title">Article Title</span>
-          <p>Article Summary. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores culpa asperiores voluptates quos rerum officiis dolorum facilis nihil pariatur consectetur.</p>
+          <span class="card-title">${article.title}</span>
+          <p>${article.summary}</p>
         `);
 
         cardAction.append(`
-          <a href="#">Read More</a>
+          <a class="orange-text" href="${article.link} target="_blank">Read More</a>
+          <a class="waves-effect waves-light btn red lighten-2"><i class="material-icons right">save</i>Save Article</a>
         `);
 
         card.append(cardContent, cardAction); 
@@ -48,10 +55,7 @@ $(document).ready(function() {
         // `); 
 
       })
-      // for (var i = 0; i < data.length; i++) {
-      //   // Display the apropos information on the page
-      //   $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
-      // }
+
     });
   }); 
 

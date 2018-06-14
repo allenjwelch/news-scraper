@@ -3,6 +3,7 @@
 
 .nav-wrapper {
   margin: auto 10px; 
+  font-family: 'IM Fell Great Primer', serif;
 }
 
 #scrapeBtn {
@@ -11,11 +12,13 @@
 
 .parallax-container {
   margin: 0;
+  width: 100%;
+
 }
 
 #parallaxImg {
-  height: 400px;
-  width: auto;
+  height: 100%;
+  width: 100%;
 }
 
 .title {
@@ -28,4 +31,13 @@
 
 #titleText, #subText {
   margin: 0;
+}
+
+.card {
+  border-radius: 10px; 
+}
+
+.noArt{
+  padding: 5px;
+  font-family: 'IM Fell Great Primer', serif;
 }

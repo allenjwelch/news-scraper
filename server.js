@@ -41,14 +41,14 @@ app.get('/scrape', function(req, res) {
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
-      .then(function(dbArticle) {
-        // View the added result in the console
-        console.log(dbArticle);
-      })
-      .catch(function(err) {
-        // If an error occurred, send it to the client
-        return res.json(err);
-      });
+        .then(function(dbArticle) {
+          // View the added result in the console
+          console.log(dbArticle);
+        })
+        .catch(function(err) {
+          // If an error occurred, send it to the client
+          return res.json(err);
+        });
     });
     res.json("Scrape Complete");
   })
