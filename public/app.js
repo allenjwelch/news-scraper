@@ -3,7 +3,7 @@ $(document).ready(function() {
 
 
   // TODO: Click for scraping Articles (send Toast)
-  $('#scrapeBtn').on("click", function() {
+  $('a#scrapeBtn').on("click", function() {
     M.toast({html: '50 Articles Scraped!'})
     $(".articles").empty(); 
     $.get("/articles", function(data) {
@@ -19,9 +19,9 @@ $(document).ready(function() {
         }
         let row = $(`<div class="row">`); 
         let col = $(`<div class="col l12 m12 s12">`); 
-        let card = $(`<div class="card teal lighten-3">`); 
+        let card = $(`<div class="card cyan darken-3 white-text">`); 
         let cardContent = $(`<div class="card-content">`); 
-        let cardAction = $(`<div class="card-action cyan lighten-4">`); 
+        let cardAction = $(`<div class="card-action teal lighten-4">`); 
 
         cardContent.append(`
           <span class="card-title">${article.title}</span>
@@ -29,7 +29,7 @@ $(document).ready(function() {
         `);
 
         cardAction.append(`
-          <a class="orange-text" href="${article.link} target="_blank">Read More</a>
+          <a class="orange-text" href="${article.link}" target="_blank">Read More</a>
           <a class="waves-effect waves-light btn red lighten-2"><i class="material-icons right">save</i>Save Article</a>
         `);
 
