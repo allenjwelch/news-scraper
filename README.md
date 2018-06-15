@@ -7,7 +7,7 @@ Web app that scrapes news articles from NY Times online and lets users view and 
 ![title image](/public/images/title.PNG)
 
 ## Build Status
-![CodeBetter](https://img.shields.io/teamcity/codebetter/bt428.svg)
+![AppVeyor](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)
 
 ## Prerequisites / Dependencies
 To duplicate you will need the following things properly installed on your computer.
