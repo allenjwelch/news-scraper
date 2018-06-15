@@ -43,7 +43,8 @@ app.get('/scrape', function(req, res) {
         summary: summary,
         link: link
       });      
-      console.log(results); 
+      // console.log(results); 
+
       // Create a new Article using the `result` object built from scraping
       // db.Article.create(result)
       //   .then(function(dbArticle) {
@@ -59,9 +60,10 @@ app.get('/scrape', function(req, res) {
 
 // Create a new Article using the `result` object built from scraping
 app.post("/articles", function(req, res) {
-  db.Article.create(req)
+  db.Article.create(req.body)
     .then(function(dbArticle) {
-      console.log(dbArticle);
+      // console.log(dbArticle);
+      res.json(dbArticle);
     })
     .catch(function(err) {
       return res.json(err);
@@ -79,7 +81,7 @@ app.get("/articles", function(req, res) {
   })
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
+// // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
   db.Article.find({ _id: req.params.id })
   .populate("note")
@@ -105,8 +107,16 @@ app.post("/articles/:id", function(req, res) {
     });
 });
 
-
-
+// Route for deleting an Article
+app.delete("/articles/:id", function(req, res) {
+  db.Article.remove({ _id: req.params.id})
+    .then(function(dbArticle) {
+      res.json(dbArticle)
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+}); 
 
 
 

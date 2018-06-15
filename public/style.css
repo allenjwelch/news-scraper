@@ -41,3 +41,49 @@
   padding: 5px;
   font-family: 'IM Fell Great Primer', serif;
 }
+
+.card-action a {
+  margin: 5px 10px;
+}
+
+
+ /* Notes =================== */
+.notes {
+  position: fixed; 
+  bottom: 30px; 
+  right: 30px; 
+  width: 30%;
+  background: whitesmoke;
+  border-radius: 10px; 
+  z-index: 3; 
+}
+
+textarea, input {
+  display: block;
+  width: 100%;
+  background-color: #FCF5C7;
+  resize: none;
+}
+
+input {
+  height: 28px;
+  font-size: 24px;
+}
+
+textarea {
+  height: 150px;
+  font-size: 18px;
+  background-color: rgb(211, 228, 248);
+}
+#noteTitle {
+  font-family: 'IM Fell Great Primer', serif;
+  padding: 8px;
+}
+
+#titleInput {
+  padding: 0 8px; 
+}
+
+#savenote {
+  margin: 10px; 
+}
