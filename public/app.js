@@ -2,15 +2,19 @@ $(document).ready(function() {
   $('.parallax').parallax();
 
 
-  // TODO: Click for scraping Articles (send Toast)
+  // Click for scraping Articles (send Toast)
   $('a#scrapeBtn').on("click", function() {
-    M.toast({html: '50 Articles Scraped!'})
+    M.toast({html: '20 Articles Scraped!'})
     $(".articles").empty(); 
-    $.get("/articles", function(data) {
+    $.ajax({
+      method: "GET", 
+      url: "/scrape", 
+    }).then(function(data) { 
+    // $.get("/scrape", function(data) {
       // For each one
       console.log(data); 
       let reducedData = [];
-      for (i=100; i < 151; i++) {
+      for (i=10; i < 31; i++) {
         reducedData.push(data[i]);
       };
       reducedData.forEach((article) => {
@@ -30,41 +34,27 @@ $(document).ready(function() {
 
         cardAction.append(`
           <a class="orange-text" href="${article.link}" target="_blank">Read More</a>
-          <a class="waves-effect waves-light btn red lighten-2"><i class="material-icons right">save</i>Save Article</a>
+          <a id="save" class="waves-effect waves-light btn red lighten-2"><i class="material-icons right">save</i>Save Article</a>
         `);
 
         card.append(cardContent, cardAction); 
         col.append(card);
         row.append(col); 
         $(".articles").append(row); 
-
-        // `)
-        // $(".articles").append(`
-        //   <div class="row">
-        //   <div class="col l12">
-        //   <div class="card teal lighten-3">
-        //   <div class="card-content">
-        //   <div class="card-action teal lighten-5">
-        // `); 
-        // $("card-content").append(`
-        //   <span class="card-title">Article Title</span>
-        //   <p>Article Summary. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolores culpa asperiores voluptates quos rerum officiis dolorum facilis nihil pariatur consectetur.</p>
-        // `);
-        // $("card-action").append(`
-        //   <a href="#">Read More</a>
-        // `); 
-
-      })
-
+      });
     });
   }); 
 
-  // TODO: GET scraped articles
-
-
   // TODO: Add scraped articles to page with button to save article
-
-
+  $('a#save').on("click", function() {
+    let thisId = $(this).attr("data-id");
+    $.ajax({
+      method: "POST", 
+      url: "/articles/" + thisId,
+    }).then(function(data) { 
+      console.log(data)
+    })
+  }); 
   // TODO: Saved Articles page- GET all saved articles with buttons to access article notes and delete from saved
 
   

@@ -32,31 +32,44 @@ mongoose.connect(MONGODB_URI);
 app.get('/scrape', function(req, res) {
   request("https://www.nytimes.com/section/us", function(error, response, html) {
     let $ = cheerio.load(html);
-    let result = {};
+    let results = [];
     $("div.story-body").each(function(i, element) {
       
-      result.title = $(element).children().children().children("h2.headline").text().trim();
-      result.summary = $(element).children().children().children("p.summary").text();
-      result.link = $(element).children().attr("href");
-
+      let title = $(element).children().children().children("h2.headline").text().trim();
+      let summary = $(element).children().children().children("p.summary").text();
+      let link = $(element).children().attr("href");
+      results.push({
+        title: title,
+        summary: summary,
+        link: link
+      });      
+      console.log(results); 
       // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
-        .then(function(dbArticle) {
-          // View the added result in the console
-          console.log(dbArticle);
-        })
-        .catch(function(err) {
-          // If an error occurred, send it to the client
-          return res.json(err);
-        });
+      // db.Article.create(result)
+      //   .then(function(dbArticle) {
+      //     console.log(dbArticle);
+      //   })
+      //   .catch(function(err) {
+      //     return res.json(err);
+      //   });
     });
-    res.json("Scrape Complete");
+    res.json(results);
   })
 });
 
+// Create a new Article using the `result` object built from scraping
+app.post("/articles", function(req, res) {
+  db.Article.create(req)
+    .then(function(dbArticle) {
+      console.log(dbArticle);
+    })
+    .catch(function(err) {
+      return res.json(err);
+    });
+})  
+
 // Route for getting all Articles from the db
 app.get("/articles", function(req, res) {
-  // TODO: Finish the route so it grabs all of the articles
   db.Article.find({})
   .then(function(dbArticle) {
     res.json(dbArticle); 
@@ -69,7 +82,7 @@ app.get("/articles", function(req, res) {
 // Route for grabbing a specific Article by id, populate it with it's note
 app.get("/articles/:id", function(req, res) {
   db.Article.find({ _id: req.params.id })
-  .populate("notes")
+  .populate("note")
   .then(function(dbArticle) {
     res.json(dbArticle)
   })
@@ -78,6 +91,19 @@ app.get("/articles/:id", function(req, res) {
   })
 });
 
+// Route for saving/updating an Article's associated Note
+app.post("/articles/:id", function(req, res) {
+  db.Note.create(req.body)
+    .then(function(dbNote) {
+      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+    })
+    .then(function(dbArticle) {
+      res.json(dbArticle);
+    })
+    .catch(function(err) {
+      res.json(err);
+    });
+});
 
 
 
