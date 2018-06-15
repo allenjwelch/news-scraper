@@ -44,15 +44,6 @@ app.get('/scrape', function(req, res) {
         link: link
       });      
       // console.log(results); 
-
-      // Create a new Article using the `result` object built from scraping
-      // db.Article.create(result)
-      //   .then(function(dbArticle) {
-      //     console.log(dbArticle);
-      //   })
-      //   .catch(function(err) {
-      //     return res.json(err);
-      //   });
     });
     res.json(results);
   })

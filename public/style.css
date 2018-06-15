@@ -27,6 +27,7 @@
   border-radius: 20px; 
   background: rgba(245, 245, 245, 0.726); 
   font-family: 'IM Fell DW Pica SC', serif;
+  padding: 10px;
 }
 
 #titleText, #subText {
