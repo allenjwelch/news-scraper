@@ -7,7 +7,7 @@ Web app that scrapes news articles from NY Times online and lets users view and 
 ![title image](/public/images/title.PNG)
 
 ## Build Status
-![AppVeyor](https://img.shields.io/appveyor/ci/gruntjs/grunt.svg)
+![CircleCI](https://img.shields.io/circleci/project/github/RedSparr0w/node-csgo-parser.svg)
 
 ## Prerequisites / Dependencies
 To duplicate you will need the following things properly installed on your computer.
