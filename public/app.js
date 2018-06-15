@@ -46,15 +46,26 @@ $(document).ready(function() {
   }); 
 
   // TODO: Add scraped articles to page with button to save article
-  $('a#save').on("click", function() {
-    let thisId = $(this).attr("data-id");
-    $.ajax({
-      method: "POST", 
-      url: "/articles/" + thisId,
-    }).then(function(data) { 
-      console.log(data)
-    })
+  $('.articles').on("click", 'a#save', function() {
+    let addTitle = $(this).parent().siblings().children('span').text(); 
+    let addSummary = $(this).parent().siblings().children('p').text(); 
+    let addLink = $(this).siblings().attr('href'); 
+    let addArticle = {
+      title: addTitle, 
+      summary: addSummary,
+      link: addLink
+    };
+    console.log(addArticle); 
+
+    // let thisId = $(this).attr("data-id");
+    // $.ajax({
+    //   method: "POST", 
+    //   url: "/articles/" + thisId,
+    // }).then(function(data) { 
+    //   console.log(data)
+    // })
   }); 
+
   // TODO: Saved Articles page- GET all saved articles with buttons to access article notes and delete from saved
 
   
